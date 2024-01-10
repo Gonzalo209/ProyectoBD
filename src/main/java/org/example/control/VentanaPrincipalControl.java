@@ -48,7 +48,7 @@ public class VentanaPrincipalControl implements ActionListener {
 
         pacienteBD.eliminar(Integer.parseInt(VentanaPrincipalVista.getTxtBuscarId().getText()));
 
-        activarBotones(true, false, false);
+        activarBotones(false, false, false);
 
         habilitarODeshabilitarJTextField(true);
 
@@ -68,6 +68,10 @@ public class VentanaPrincipalControl implements ActionListener {
 
             MensajeVista.mensajeError("No se encontro el paciente", "Error");
 
+            VentanaPrincipalVista.getBtnBuscar().setText("");
+
+            VentanaPrincipalVista.getBtnBuscar().setEnabled(false);
+
         }
 
     }
@@ -76,7 +80,7 @@ public class VentanaPrincipalControl implements ActionListener {
 
         pacienteBD.modificar();
 
-        activarBotones(true, false, false);
+        activarBotones(false, false, false);
 
         habilitarODeshabilitarJTextField(true);
 
@@ -104,6 +108,7 @@ public class VentanaPrincipalControl implements ActionListener {
         VentanaPrincipalVista.getBtnAgregar().setEnabled(btn1);
         VentanaPrincipalVista.getBtnEliminar().setEnabled(btn2);
         VentanaPrincipalVista.getBtnModificar().setEnabled(btn3);
+        VentanaPrincipalVista.getBtnBuscar().setEnabled(false);
 
     }
 
