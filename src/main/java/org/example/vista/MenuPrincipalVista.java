@@ -43,6 +43,8 @@ public class MenuPrincipalVista extends JFrame {
 
         ipAltaBajaMod.addActionListener(new MenuPrincipalControl());
 
+        ipMostra.addActionListener(new MenuPrincipalControl());
+
         mPacientes.add(ipAltaBajaMod);
         mPacientes.add(ipMostra);
 

@@ -5,10 +5,13 @@ import org.example.vista.MensajeVista;
 import org.example.vista.VentanaPrincipalVista;
 
 import javax.swing.*;
+import java.beans.Statement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PacienteBD implements DAOPaciente {
 
@@ -16,6 +19,74 @@ public class PacienteBD implements DAOPaciente {
 
         return Conexion.getConnection();
 
+    }
+
+    @Override
+    public List<Paciente> listar() {
+
+        List<Paciente> pacienteList = new ArrayList<>();
+
+        try {
+
+            PreparedStatement lista = getConnection().prepareStatement("SELECT pe.id, pe.nombre, pe.apellido, pe.telefono, pa.edad,\n" +
+                    "pa.peso, pa.talla, pa.padecimiento, pa.num_estudio FROM persona pe \n" +
+                    "INNER JOIN paciente pa ON pe.id = pa.id;");
+
+            ResultSet resultSet = lista.executeQuery();
+
+            while(resultSet.next()) {
+
+                pacienteList.add(new Paciente(resultSet.getInt("id"),
+                        resultSet.getString("nombre"),
+                        resultSet.getString("apellido"),
+                        resultSet.getString("telefono"),
+                        resultSet.getInt(resultSet.getInt("id")),
+                        resultSet.getInt("edad"),
+                        resultSet.getFloat("peso"),
+                        resultSet.getFloat("talla"),
+                        resultSet.getString("padecimiento"),
+                        resultSet.getInt("num_estudio")));
+
+            }
+
+        } catch (SQLException e) {
+
+            throw new RuntimeException(e);
+        }
+
+        return pacienteList;
+
+    }
+
+    public Object[] cargarDatos() {
+
+        Object[] datos = null;
+
+        if(listar().isEmpty()) {
+
+            return null;
+
+        } else {
+
+            for (int i = 0; i < listar().size(); i++) {
+
+                int id = listar().get(i).getPersonaId();
+                String nombre = listar().get(i).getNombre();
+                String apellido = listar().get(i).getApellidos();
+                String telefono = listar().get(i).getTelefono();
+                int edad = listar().get(i).getEdad();
+                float peso = listar().get(i).getPeso();
+                float talla = listar().get(i).getTalla();
+                String padecimiento = listar().get(i).getPadecimiento();
+                int num = listar().get(i).getNumEstudios();
+
+                datos = new Object[]{id, nombre, apellido, telefono, edad, peso, talla, padecimiento, num};
+
+            }
+
+        }
+
+        return datos;
     }
 
     @Override
