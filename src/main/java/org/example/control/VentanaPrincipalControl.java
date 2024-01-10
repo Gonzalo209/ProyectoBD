@@ -68,7 +68,7 @@ public class VentanaPrincipalControl implements ActionListener {
 
             MensajeVista.mensajeError("No se encontro el paciente", "Error");
 
-            VentanaPrincipalVista.getBtnBuscar().setText("");
+            VentanaPrincipalVista.getTxtBuscarId().setText("");
 
             VentanaPrincipalVista.getBtnBuscar().setEnabled(false);
 

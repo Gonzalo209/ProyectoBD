@@ -87,10 +87,14 @@ public class VentanaPrincipalVista extends JInternalFrame {
 
         txtPeso.addKeyListener(new ValidacionBotonAgregarControl());
 
+        txtPeso.addKeyListener(new ValidacionDecimalPesoControl());
+
         pnlEdicion.add(lblPeso);
         pnlEdicion.add(txtPeso);
 
         txtTalla.addKeyListener(new ValidacionBotonAgregarControl());
+
+        txtTalla.addKeyListener(new ValidacionDecimalTallaControl());
 
         pnlEdicion.add(lblTalla);
         pnlEdicion.add(txtTalla);

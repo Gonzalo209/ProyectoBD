@@ -1,5 +1,7 @@
 package org.example.control;
 
+import org.example.vista.MensajeVista;
+
 import javax.swing.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -14,7 +16,7 @@ public class ValidacionLetrasControl extends KeyAdapter {
 
         if(! letra) {
 
-            JOptionPane.showMessageDialog(null, "Ingrese solo letras ", "Error", JOptionPane.ERROR_MESSAGE);
+            MensajeVista.mensajeError("Ingrese solo letras", "Error");
 
             e.consume();
 
